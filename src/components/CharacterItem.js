@@ -17,5 +17,9 @@ const CharacterItem = ({ character }) => {
 
 export default CharacterItem;
 
-const Container = styled.div``;
-const CharacterContainer = styled.div``;
+const Container = styled.div`
+  margin: auto;
+`;
+const CharacterContainer = styled.div`
+  padding-bottom: 20px;
+`;
