@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import SearchIcon from "@material-ui/icons/Search";
 
-const Header = () => {
+const Header = ({ query }) => {
+  const [text, setText] = useState("");
+
+  const onSearchHandler = (q) => {
+    setText(q);
+    query(q);
+  };
+
   return (
     <HeaderContainer>
       <MarvelLogo>
@@ -13,7 +20,13 @@ const Header = () => {
       </MarvelLogo>
 
       <SearchContainer>
-        <SearchInput type="text" placeholder="Find a character" autoFocus />
+        <SearchInput
+          type="text"
+          placeholder="Find a character"
+          autoFocus
+          onChange={(e) => onSearchHandler(e.target.value)}
+          value={text}
+        />
         <SearchIconContainer>
           <SearchIcon />
         </SearchIconContainer>
