@@ -2,6 +2,8 @@ import "./App.css";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Characters from "./components/Characters";
+import Header from "./components/Header";
+import styled from "styled-components";
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -19,7 +21,14 @@ function App() {
     fetch();
   }, []);
 
-  return <Characters characters={characters} />;
+  return (
+    <Container>
+      <Header />
+      <Characters characters={characters} />
+    </Container>
+  );
 }
 
 export default App;
+
+const Container = styled.div``;
