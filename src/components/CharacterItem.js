@@ -19,6 +19,7 @@ export default CharacterItem;
 
 const Container = styled.div`
   margin: auto;
+  z-index: 100;
 `;
 const CharacterContainer = styled.div`
   padding-bottom: 20px;
