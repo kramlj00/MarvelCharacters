@@ -32,5 +32,6 @@ const CharacterContainer = styled.div`
   margin-top: -900px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
+  column-gap: 10px;
+  row-gap: 60px;
 `;
