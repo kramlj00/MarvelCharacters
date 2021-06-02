@@ -18,6 +18,8 @@ const CharacterItem = ({ character }) => {
 export default CharacterItem;
 
 const Container = styled.div`
+  width: 220px;
+  height: 300px;
   margin: auto;
   z-index: 100;
 `;
