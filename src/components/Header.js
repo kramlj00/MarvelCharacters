@@ -51,6 +51,19 @@ const MarvelLogo = styled.div`
     height: 50px;
     margin-left: 11px;
   }
+
+  @media screen and (min-width: 564px) and (max-width: 1024px) {
+    img {
+      width: 120px;
+    }
+  }
+
+  @media screen and (max-width: 564px) {
+    img {
+      width: 85px;
+      height: 40px;
+    }
+  }
 `;
 
 const SearchContainer = styled.div`
