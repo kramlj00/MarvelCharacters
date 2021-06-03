@@ -9,7 +9,8 @@ function App() {
   const [characters, setCharacters] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [showFavBtn, setShowFavBtn] = useState(true);
-  const [showFavText, setShowFavText] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [charactersPerPage] = useState(8);
 
   // fetch character list and make API request
   useEffect(() => {
@@ -26,7 +27,6 @@ function App() {
           );
           // console.log(result.data.data.results);
           setCharacters(result.data.data.results);
-          setShowFavText("");
         } else {
           let favoriteCharacters = JSON.parse(
             localStorage.getItem("favorites")
@@ -34,7 +34,6 @@ function App() {
           //console.log(favoriteCharacters);
           setShowFavBtn(false);
           setCharacters(favoriteCharacters);
-          setShowFavText("Favorites:");
         }
       } else {
         const result = await axios(
@@ -42,17 +41,27 @@ function App() {
         );
         setCharacters(result.data.data.results);
         setShowFavBtn(true);
-        setShowFavText("");
       }
     };
     fetch();
   }, [searchText]); // when searchText changes call fetch function
 
+  // Get current characters
+  const indexOfLastCharacter = currentPage * charactersPerPage;
+  const indexOfFirstCharacter = indexOfLastCharacter - charactersPerPage;
+  const currentCharacters = characters.slice(
+    indexOfFirstCharacter,
+    indexOfLastCharacter
+  );
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <Container>
       {/* we need to get text from onChange function */}
       <Header searchText={(t) => setSearchText(t)} />
-      <Characters characters={characters} showFavBtn={showFavBtn} />
+      <Characters characters={currentCharacters} showFavBtn={showFavBtn} />
     </Container>
   );
 }
