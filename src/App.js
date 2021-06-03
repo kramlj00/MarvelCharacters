@@ -9,6 +9,7 @@ function App() {
   const [characters, setCharacters] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [showFavBtn, setShowFavBtn] = useState(true);
+  const [showFavText, setShowFavText] = useState("");
 
   // fetch character list and make API request
   useEffect(() => {
@@ -25,12 +26,15 @@ function App() {
           );
           // console.log(result.data.data.results);
           setCharacters(result.data.data.results);
+          setShowFavText("");
         } else {
           let favoriteCharacters = JSON.parse(
             localStorage.getItem("favorites")
           );
+          //console.log(favoriteCharacters);
           setShowFavBtn(false);
           setCharacters(favoriteCharacters);
+          setShowFavText("Favorites:");
         }
       } else {
         const result = await axios(
@@ -38,6 +42,7 @@ function App() {
         );
         setCharacters(result.data.data.results);
         setShowFavBtn(true);
+        setShowFavText("");
       }
     };
     fetch();
