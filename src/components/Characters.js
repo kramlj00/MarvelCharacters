@@ -34,4 +34,12 @@ const CharacterContainer = styled.div`
   grid-template-columns: repeat(4, 1fr);
   column-gap: 10px;
   row-gap: 60px;
+
+  @media screen and (min-width: 564px) and (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (max-width: 564px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
