@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import SearchIcon from "@material-ui/icons/Search";
 
-const Header = ({ query }) => {
+const Header = ({ searchText }) => {
   const [text, setText] = useState("");
 
-  const onSearchHandler = (q) => {
-    setText(q);
-    query(q);
+  const onSearchHandler = (t) => {
+    setText(t);
+    searchText(t);
   };
 
   return (

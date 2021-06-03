@@ -2,6 +2,13 @@ import React from "react";
 import styled from "styled-components";
 
 const CharacterItem = ({ character }) => {
+  const addToFavorites = (character) => {
+    // getting the previous element and adding the new favorite item
+    let previousData = JSON.parse(localStorage.getItem("favorites"));
+    previousData.push(character);
+    localStorage.setItem("favorites", JSON.stringify(previousData));
+  };
+
   return (
     <Container>
       <CharacterContainer>
@@ -10,7 +17,9 @@ const CharacterItem = ({ character }) => {
           alt=""
         ></img>
         <h2>{character.name}</h2>
-        <AddToFavoritesButton>Add To Favorites</AddToFavoritesButton>
+        <AddToFavoritesButton onClick={() => addToFavorites(character)}>
+          Add To Favorites
+        </AddToFavoritesButton>
       </CharacterContainer>
     </Container>
   );
