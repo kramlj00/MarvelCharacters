@@ -8,6 +8,7 @@ import styled from "styled-components";
 function App() {
   const [characters, setCharacters] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const [showFavBtn, setShowFavBtn] = useState(true);
 
   // fetch character list and make API request
   useEffect(() => {
@@ -28,6 +29,7 @@ function App() {
           let favoriteCharacters = JSON.parse(
             localStorage.getItem("favorites")
           );
+          setShowFavBtn(false);
           setCharacters(favoriteCharacters);
         }
       } else {
@@ -35,6 +37,7 @@ function App() {
           `http://gateway.marvel.com/v1/public/characters?nameStartsWith=${searchText}&ts=1&apikey=b2460632688032d64ca0550d80068081&hash=a12f41440a3d2580606835c9bdde03c2`
         );
         setCharacters(result.data.data.results);
+        setShowFavBtn(true);
       }
     };
     fetch();
@@ -44,7 +47,7 @@ function App() {
     <Container>
       {/* we need to get text from onChange function */}
       <Header searchText={(t) => setSearchText(t)} />
-      <Characters characters={characters} />
+      <Characters characters={characters} showFavBtn={showFavBtn} />
     </Container>
   );
 }

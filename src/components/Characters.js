@@ -2,13 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import CharacterItem from "./CharacterItem";
 
-const Characters = ({ characters }) => {
+const Characters = ({ characters, showFavBtn }) => {
   return (
     <Container>
       <Banner></Banner>
       <CharacterContainer>
         {characters.map((character) => (
-          <CharacterItem key={character.id} character={character} />
+          <CharacterItem
+            key={character.id}
+            character={character}
+            showFavBtn={showFavBtn}
+          />
         ))}
       </CharacterContainer>
     </Container>

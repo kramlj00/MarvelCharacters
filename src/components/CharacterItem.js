@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
-const CharacterItem = ({ character }) => {
+const CharacterItem = ({ character, showFavBtn }) => {
   const addToFavorites = (character) => {
     // getting the previous element and adding the new favorite item
     let previousData = JSON.parse(localStorage.getItem("favorites"));
@@ -17,9 +17,11 @@ const CharacterItem = ({ character }) => {
           alt=""
         ></img>
         <h2>{character.name}</h2>
-        <AddToFavoritesButton onClick={() => addToFavorites(character)}>
-          Add To Favorites
-        </AddToFavoritesButton>
+        {showFavBtn ? (
+          <AddToFavoritesButton onClick={() => addToFavorites(character)}>
+            Add To Favorites
+          </AddToFavoritesButton>
+        ) : null}
       </CharacterContainer>
     </Container>
   );
