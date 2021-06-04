@@ -33,8 +33,8 @@ const Banner = styled.div`
   background-position: center;
   background-size: cover;
   z-index: 1;
-  opacity: 0.7;
-  //mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  //opacity: 0.7;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
 `;
 
 const CharacterContainer = styled.div`

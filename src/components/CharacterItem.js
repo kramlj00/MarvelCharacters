@@ -35,7 +35,16 @@ const Container = styled.div`
   margin: auto;
   z-index: 100;
 `;
-const CharacterContainer = styled.div``;
+const CharacterContainer = styled.div`
+  img {
+    border-radius: 5px;
+    :hover {
+      border-radius: 0px;
+      transform: scale(1.05);
+      transition: 0.6s all ease;
+    }
+  }
+`;
 
 const AddToFavoritesButton = styled.button`
   cursor: pointer;
