@@ -1,27 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import StarIcon from "@material-ui/icons/Star";
 
-const CharacterItem = ({ character, showFavBtn }) => {
+const CharacterItem = ({ character, favIconBlack }) => {
+  console.log(character);
+  const [color, setColor] = useState("black");
+
   const addToFavorites = (character) => {
-    // getting the previous element and adding the new favorite item
-    let previousData = JSON.parse(localStorage.getItem("favorites"));
-    previousData.push(character);
-    localStorage.setItem("favorites", JSON.stringify(previousData));
+    if (color === "black") {
+      setColor("yellow");
+
+      let previousData = JSON.parse(localStorage.getItem("favorites"));
+      if (previousData === null) {
+        previousData = [];
+      }
+
+      // here we stringify everything that is in the local storage
+      const stringified = JSON.stringify(previousData);
+
+      // if stringified doesn't include character.id save that character in local storage
+      console.log(!stringified.includes(character.id));
+      if (!stringified.includes(character.id)) {
+        /*console.log(character.id);*/
+        previousData.push(character);
+        localStorage.setItem("favorites", JSON.stringify(previousData));
+      } else {
+        alert("This character is already added to favorites");
+      }
+    }
   };
 
   return (
     <Container>
-      <CharacterContainer>
+      <CharacterContainer id={character.id}>
         <img
-          src={character.thumbnail.path + "/standard_fantastic.jpg"}
+          src={
+            character.thumbnail.path +
+            "/standard_fantastic." +
+            character.thumbnail.extension
+          }
           alt=""
-        ></img>
+        />
         <h2>{character.name}</h2>
-        {showFavBtn ? (
-          <AddToFavoritesButton onClick={() => addToFavorites(character)}>
-            Add To Favorites
-          </AddToFavoritesButton>
-        ) : null}
+        {favIconBlack ? (
+          <AddToFavoritesIcon
+            id={character.id}
+            style={{ color: color }}
+            onClick={() => addToFavorites(character)}
+          >
+            <StarIcon />
+          </AddToFavoritesIcon>
+        ) : (
+          <AddToFavoritesIcon style={{ color: "yellow" }}>
+            <StarIcon />
+          </AddToFavoritesIcon>
+        )}
       </CharacterContainer>
     </Container>
   );
@@ -46,13 +79,17 @@ const CharacterContainer = styled.div`
   }
 `;
 
-const AddToFavoritesButton = styled.button`
+const AddToFavoritesIcon = styled.div`
   cursor: pointer;
-  border-radius: 4px;
-  height: 30px;
+  margin-top: 10px;
   width: 100%;
-  background-color: #ddd;
-  :hover {
-    background: #b7b7b7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .star-active {
+    background-color: transparent;
+    cursor: pointer;
+    color: yellow;
   }
 `;

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import CharacterItem from "./CharacterItem";
 
-const Characters = ({ characters, showFavBtn, loading }) => {
+const Characters = ({ data, favIconBlack, loading }) => {
   if (loading) {
     return <h2>Loading...</h2>;
   }
@@ -11,11 +11,11 @@ const Characters = ({ characters, showFavBtn, loading }) => {
     <Container>
       <Banner></Banner>
       <CharacterContainer>
-        {characters.map((character) => (
+        {data.map((character) => (
           <CharacterItem
             key={character.id}
             character={character}
-            showFavBtn={showFavBtn}
+            favIconBlack={favIconBlack}
           />
         ))}
       </CharacterContainer>

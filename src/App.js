@@ -10,7 +10,7 @@ function App() {
   const [characters, setCharacters] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchText, setSearchText] = useState("");
-  const [showFavBtn, setShowFavBtn] = useState(true);
+  const [favIconBlack, setFavIconBlack] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [charactersPerPage] = useState(8);
 
@@ -36,7 +36,7 @@ function App() {
             localStorage.getItem("favorites")
           );
           //console.log(favoriteCharacters);
-          setShowFavBtn(false);
+          setFavIconBlack(false);
           setCharacters(favoriteCharacters);
           setLoading(false);
         }
@@ -45,7 +45,7 @@ function App() {
           `http://gateway.marvel.com/v1/public/characters?nameStartsWith=${searchText}&ts=1&apikey=b2460632688032d64ca0550d80068081&hash=a12f41440a3d2580606835c9bdde03c2`
         );
         setCharacters(result.data.data.results);
-        setShowFavBtn(true);
+        setFavIconBlack(true);
         setLoading(false);
       }
     };
@@ -63,15 +63,13 @@ function App() {
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  const data = Array.from(currentCharacters);
+  console.log(data);
+
   return (
     <Container>
-      {/* we need to get text from onChange function */}
       <Header searchText={(t) => setSearchText(t)} />
-      <Characters
-        characters={currentCharacters}
-        showFavBtn={showFavBtn}
-        loading={loading}
-      />
+      <Characters data={data} favIconBlack={favIconBlack} loading={loading} />
       <Pagination
         charactersPerPage={charactersPerPage}
         totalCharacters={characters.length}
