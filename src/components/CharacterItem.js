@@ -1,34 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import StarIcon from "@material-ui/icons/Star";
+import AddToFavorites from "../components/AddToFavorites";
 
 const CharacterItem = ({ character, favIconBlack }) => {
-  console.log(character);
+  //console.log(character);
   const [color, setColor] = useState("black");
-
-  const addToFavorites = (character) => {
-    if (color === "black") {
-      setColor("yellow");
-
-      let previousData = JSON.parse(localStorage.getItem("favorites"));
-      if (previousData === null) {
-        previousData = [];
-      }
-
-      // here we stringify everything that is in the local storage
-      const stringified = JSON.stringify(previousData);
-
-      // if stringified doesn't include character.id save that character in local storage
-      console.log(!stringified.includes(character.id));
-      if (!stringified.includes(character.id)) {
-        /*console.log(character.id);*/
-        previousData.push(character);
-        localStorage.setItem("favorites", JSON.stringify(previousData));
-      } else {
-        alert("This character is already added to favorites");
-      }
-    }
-  };
 
   return (
     <Container>
@@ -46,12 +23,12 @@ const CharacterItem = ({ character, favIconBlack }) => {
           <AddToFavoritesIcon
             id={character.id}
             style={{ color: color }}
-            onClick={() => addToFavorites(character)}
+            onClick={() => AddToFavorites(character, color, setColor)}
           >
             <StarIcon />
           </AddToFavoritesIcon>
         ) : (
-          <AddToFavoritesIcon style={{ color: "yellow" }}>
+          <AddToFavoritesIcon style={{ color: "yellow", cursor: "default" }}>
             <StarIcon />
           </AddToFavoritesIcon>
         )}
@@ -86,10 +63,4 @@ const AddToFavoritesIcon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  .star-active {
-    background-color: transparent;
-    cursor: pointer;
-    color: yellow;
-  }
 `;

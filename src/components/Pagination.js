@@ -29,9 +29,18 @@ const Container = styled.div`
   min-width: 200px;
   justify-content: center;
   gap: 1rem;
+  margin-bottom: 10px;
   li {
     z-index: 100;
     text-style-decoration: none;
     list-style-type: none;
+  }
+  a {
+    font-size: 22px;
+    margin-left: 9px;
+    font-weight: bold;
+    :hover {
+      color: blue;
+    }
   }
 `;

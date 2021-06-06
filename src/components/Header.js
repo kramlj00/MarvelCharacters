@@ -44,6 +44,12 @@ const HeaderContainer = styled.div`
   align-items: center;
   color: white;
   justify-content: space-between;
+
+  @media screen and (max-width: 300px) {
+    flex-direction: column;
+    height: 90px;
+    padding: 10px;
+  }
 `;
 
 const MarvelLogo = styled.div`
@@ -58,10 +64,18 @@ const MarvelLogo = styled.div`
     }
   }
 
-  @media screen and (max-width: 564px) {
+  @media screen and (min-width: 300px) and (max-width: 564px) {
     img {
       width: 85px;
       height: 40px;
+      margin-left: 5px;
+    }
+  }
+
+  @media screen and (max-width: 300px) {
+    img {
+      width: 130px;
+      height: 45px;
     }
   }
 `;
