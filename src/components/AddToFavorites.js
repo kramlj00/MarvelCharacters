@@ -11,9 +11,9 @@ const AddToFavorites = (character, color, setColor) => {
     const stringified = JSON.stringify(previousData);
 
     // if stringified doesn't include character.id save that character in local storage
-    console.log(!stringified.includes(character.id));
+    // console.log(!stringified.includes(character.id));
     if (!stringified.includes(character.id)) {
-      /*console.log(character.id);*/
+      //console.log(character.id);
       previousData.push(character);
       localStorage.setItem("favorites", JSON.stringify(previousData));
     } else {

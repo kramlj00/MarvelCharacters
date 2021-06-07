@@ -63,7 +63,7 @@ function FetchCharacters() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const data = Array.from(currentCharacters);
-  console.log(data);
+  //console.log(data);
 
   return (
     <Container>
