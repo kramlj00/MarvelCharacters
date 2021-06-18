@@ -3,9 +3,32 @@ import styled from "styled-components";
 import StarIcon from "@material-ui/icons/Star";
 import AddToFavorites from "../components/AddToFavorites";
 
+const Char = (character) => {
+  if (character.id === 5) {
+    return true;
+  }
+};
+
 const CharacterItem = ({ character, favIconBlack }) => {
   //console.log(character);
   const [color, setColor] = useState("black");
+
+  const IsFavorite = () => {
+    let favorites = JSON.parse(localStorage.getItem("favorites"));
+    let isFavorite = favorites.find((c) => {
+      if (c.id === character.id) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+    console.log(isFavorite);
+    if (isFavorite) {
+      return "yellow";
+    } else {
+      return "black";
+    }
+  };
 
   return (
     <Container>
@@ -19,25 +42,33 @@ const CharacterItem = ({ character, favIconBlack }) => {
           alt=""
         />
         <h2>{character.name}</h2>
-        {favIconBlack ? (
-          <AddToFavoritesIcon
-            id={character.id}
-            style={{ color: color }}
-            onClick={() => AddToFavorites(character, color, setColor)}
-          >
-            <StarIcon />
-          </AddToFavoritesIcon>
-        ) : (
-          <AddToFavoritesIcon style={{ color: "yellow", cursor: "default" }}>
-            <StarIcon />
-          </AddToFavoritesIcon>
-        )}
+        <AddToFavoritesIcon
+          id={character.id}
+          style={{ color: IsFavorite() }}
+          onClick={() => AddToFavorites(character, color, setColor)}
+        >
+          <StarIcon />
+        </AddToFavoritesIcon>
       </CharacterContainer>
     </Container>
   );
 };
 
 export default CharacterItem;
+/*
+{favIconBlack ? (
+  <AddToFavoritesIcon
+    id={character.id}
+    style={{ color: color }}
+    onClick={() => AddToFavorites(character, color, setColor)}
+  >
+    <StarIcon />
+  </AddToFavoritesIcon>
+) : (
+  <AddToFavoritesIcon style={{ color: "yellow", cursor: "default" }}>
+    <StarIcon />
+  </AddToFavoritesIcon>
+)}*/
 
 const Container = styled.div`
   width: 250px;
